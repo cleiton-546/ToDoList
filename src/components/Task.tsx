@@ -7,12 +7,14 @@ import { useState } from 'react';
 interface TaskProps {
     content: string;
     onDeleteTask: (task: string) => void;
+    onToggleTask: (checked: boolean) => void;
     checked: boolean;
 }
 
 
-export function Task({ content, onDeleteTask,  checked, }: TaskProps) {
+export function Task({ content, onDeleteTask,  checked, onToggleTask }: TaskProps) {
     const [isChecked, setIsChecked] = useState(checked)
+    
 
     function handleDeleteTask() {
         onDeleteTask(content)
@@ -21,6 +23,7 @@ export function Task({ content, onDeleteTask,  checked, }: TaskProps) {
     const toggleChecked = () => {
         const newCheckedState = !isChecked;
         setIsChecked(newCheckedState);
+        onToggleTask( newCheckedState);
     }
 
     const taskClassName = isChecked ?  `${styles.container} ${styles.completed}` : styles.container;
@@ -29,7 +32,7 @@ export function Task({ content, onDeleteTask,  checked, }: TaskProps) {
     return(
         <div className={taskClassName}>
             <div className={styles.checked}>
-               <button  className={styles.circle} onClick={toggleChecked}><IoIosCheckmark/></button>                   
+               <button  className={styles.circle} onClick={toggleChecked} ><IoIosCheckmark/></button>                   
             </div>
             <div className={styles.text}>
                 <p>{content}</p>

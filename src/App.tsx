@@ -5,7 +5,7 @@ import { Task } from "./components/Task";
 import { FiPlusCircle } from "react-icons/fi";
 
 import './global.css';
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 
 
@@ -39,9 +39,16 @@ function App({}) {
   }
 
 
+  function handleToggleTask( checked: boolean) {
+    if(checked){
+      setCompletedTask(prevCount => prevCount + 1)
+    } else {
+      setCompletedTask(prevCount => prevCount -1)
+    }
+  }
 
-  
-  
+ 
+ 
 
   const isNewTaskEmpty = newTask.length === 0;
 
@@ -88,6 +95,7 @@ function App({}) {
             content={task}
             onDeleteTask={deleteTask}
             checked={false}
+            onToggleTask={handleToggleTask}
           
            />
            )
