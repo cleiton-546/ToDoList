@@ -1,0 +1,22 @@
+
+.empty {
+    display: flex;
+    padding: 4rem 1.5rem;
+    margin-top: 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    align-self: stretch;
+    color: var(--gray-300);
+    border-radius: 8px;
+    border-top: 1px solid var(--gray-400);
+    font-size: 1rem;
+    font-weight: 400;
+    
+}
+
+.empty strong {
+    font-weight: 700;
+}
+

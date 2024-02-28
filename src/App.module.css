@@ -1,0 +1,82 @@
+
+.main {
+  display: block;
+  padding: 0 22rem 5rem 22rem;
+  weight: 100%;
+ 
+ 
+}
+
+.form  {
+  display: flex;
+  margin-top: -1.8rem;
+  gap: 0.5rem;
+}
+.form textarea {
+  display: flex;
+  width: 100%;
+  height: 3.37rem;
+  padding: 1rem;
+  border-radius: 8px;
+  resize: none;
+  border: 1px solid var(--gray-700);
+  background: var(--gray-500);
+  color: var(--gray-300);
+  outline: none;
+  
+}
+
+.form button {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  
+  font-weight: 700;
+  border-radius: 8px;
+  background: var(--blue-dark);
+  color: var(--gray-100);
+  border: none;
+}
+
+.form svg {
+   font-size: 1.2rem;
+}
+
+
+.form button:hover {
+  background: var(--blue);
+} 
+
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+}
+
+.contentInfo {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.contentInfo {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.contentInfo span {
+    border-radius: 999px;
+    background: var(--gray-400);
+    color: var(--gray-200);
+    padding: 0 0.5rem;
+}
+
+.contentInfo p {
+    color: var(--blue)
+}
+
+.contentInfo .completed {
+    color: var(--purple);
+}

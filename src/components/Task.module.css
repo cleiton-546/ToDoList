@@ -1,0 +1,73 @@
+.container  {
+    display: flex;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+    background: var(--gray-500);
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.06);
+    gap: 0.75rem;   
+}
+
+.circle {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%; 
+    border: 1px solid var(--blue);
+    background: none;
+}
+
+.circle:hover {
+    background-color: var(--blue-dark);
+}
+
+.circle svg {
+    color: var(--gray-100);
+    display: none;
+}
+
+.text {
+    color: var(--gray-100);
+    font-size: 0.875rem;
+    font-weight: 400;
+     
+}
+
+.button {
+    display: flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    border-radius: 4px;
+    justify-content: center;
+    color: var(--gray-100);
+    background: none;
+    border: none;
+}
+
+.button:hover {
+    color: var(--danger);
+    background: var(--gray-400);
+   
+}
+
+
+.completed { 
+   
+  .text {  
+      text-decoration: line-through;  
+   } 
+   
+
+   .circle {
+    background: var(--purple-dark);
+    border: none
+   }
+
+   .circle svg {
+    display: block;
+   }
+
+   .circle:hover {
+      background: var(--purple)
+   }
+}
