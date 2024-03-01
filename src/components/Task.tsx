@@ -3,27 +3,26 @@ import styles from './Task.module.css'
 import { IoIosCheckmark } from "react-icons/io";
 import { GoTrash } from "react-icons/go"
 import { useState } from 'react';
+import { ITask } from '../App';
 
 interface TaskProps {
-    content: string;
-    onDeleteTask: (task: string) => void;
-    onToggleTask: (checked: boolean) => void;
-    checked: boolean;
+    data: ITask
+    onDeleteTask: (id: string) => void;
+    onToggleTask: ( id: string, checked: boolean ) => void;
 }
 
-
-export function Task({ content, onDeleteTask,  checked, onToggleTask }: TaskProps) {
-    const [isChecked, setIsChecked] = useState(checked)
+export function Task({ data, onDeleteTask,  onToggleTask }: TaskProps) {
+    const [isChecked, setIsChecked] = useState(Boolean)
     
 
     function handleDeleteTask() {
-        onDeleteTask(content)
+        onDeleteTask(data.id)
     }
 
     const toggleChecked = () => {
         const newCheckedState = !isChecked;
         setIsChecked(newCheckedState);
-        onToggleTask( newCheckedState);
+        onToggleTask( data.id,  newCheckedState);
     }
 
     const taskClassName = isChecked ?  `${styles.container} ${styles.completed}` : styles.container;
@@ -35,7 +34,7 @@ export function Task({ content, onDeleteTask,  checked, onToggleTask }: TaskProp
                <button  className={styles.circle} onClick={toggleChecked} ><IoIosCheckmark/></button>                   
             </div>
             <div className={styles.text}>
-                <p>{content}</p>
+                <p>{data.content}</p>
             </div>
             <button className={styles.button} onClick={handleDeleteTask}><GoTrash/></button>
         </div>

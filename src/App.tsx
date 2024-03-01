@@ -3,55 +3,69 @@ import { Header } from "./components/Header"
 import { Empty } from "./components/Empty"
 import { Task } from "./components/Task";
 import { FiPlusCircle } from "react-icons/fi";
-
+import { v4 as uuidv4 } from 'uuid'
 import './global.css';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
 
-
-
+export interface ITask {
+  id: string
+  content: string
+  isCompleted: boolean
+}
 
 function App({}) {
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [newTaskContent, setNewTaskContent] = useState('')
 
+  
 
-
-  const [task, setTask] = useState<string[]>([]);
-  const [newTask, setNewTask] = useState("")
-  const [completedTask, setCompletedTask] = useState<number>(0)
-
-
-  function handleCreateNewTask(event: FormEvent) {
-    event.preventDefault()
-
-    setTask ([...task, newTask])
-    setNewTask('')
-  }
-
-  function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
-     setNewTask(event.target.value)
-     
-  }
-
-  function deleteTask(taskToDelete: string){
-    const taskWithoutDeleteOne = task.filter(task => {
-        return task !== taskToDelete
-    })
-     setTask(taskWithoutDeleteOne)
-  }
-
-
-  function handleToggleTask( checked: boolean) {
-    if(checked){
-      setCompletedTask(prevCount => prevCount + 1)
-    } else {
-      setCompletedTask(prevCount => prevCount -1)
+  const checkedTaskCounter = tasks.reduce((prevValue, currentTask) => { 
+    if(currentTask.isCompleted) {
+      return prevValue + 1
     }
+
+    return prevValue
+ }, 0)
+
+
+  function handleCreateNewTask() {
+    if(!newTaskContent) {
+      return
+    }
+
+    const newTask: ITask = {
+      id: uuidv4(),
+      content: newTaskContent,
+      isCompleted: false
+    }
+   
+
+    setTasks ((state) => [...state, newTask])
+    setNewTaskContent('')
   }
 
- 
- 
+  
+  function deleteTask(id: string) {
+    const filteredTasks = tasks.filter((task) => task.id !== id)
+    
+    if(!confirm("Quer mesmo apagar a tarefa?")) {  
+      return
+    }
+    setTasks(filteredTasks)
+  }
 
-  const isNewTaskEmpty = newTask.length === 0;
 
+  function handleToggleTask( id: string, checked: boolean) {
+    const updateTasks = tasks.map((task) => {
+      if(task.id === id) {
+        return  {...task, isCompleted: checked}
+      }
+      return {...task}
+    })
+    setTasks(updateTasks)
+  }
+  
+   const isNewTaskEmpty = newTaskContent.length === 0;
   
 
   return (
@@ -61,16 +75,16 @@ function App({}) {
 
        <div className={styles.main}>
 
-         <form onSubmit={handleCreateNewTask} className={styles.form}>
+         <form  className={styles.form}>
 
-          <textarea
-          value={newTask}
-          onChange={handleNewTaskChange}
-          name="Adicione uma tarefa"></textarea>
+          <input
+           onChange={(e) => setNewTaskContent(e.target.value)}
+           value={newTaskContent}
+           />
 
           <button 
-
           disabled={isNewTaskEmpty} 
+          onClick={handleCreateNewTask}
           type="submit">Criar <FiPlusCircle /></button>
       
          </form>
@@ -78,34 +92,39 @@ function App({}) {
           <div className={styles.info}>   
            <div className={styles.contentInfo}>     
               <p>Tarefas criadas</p>      
-              <span>{task.length}</span>      
+              <span>{tasks.length}</span>      
             </div>    
              <div className={styles.contentInfo}>   
-              <p className={styles.completed}>Concluídas</p>     
-              <span>{completedTask}</span>      
+              <p className={styles.completed}>Concluídas</p>
+              {tasks.some(task => task.isCompleted === true) ? (
+                
+              <div className={styles.checked}>
+                <span>{checkedTaskCounter}</span>
+                   <div>de</div>
+                <span>{tasks.length}</span> 
+              </div>                 
+              ) : ( 
+                <span>0</span> 
+              )}   
             </div>                    
           </div>             
 
          
-         {task.length === 0 && <Empty/>}
+         {tasks.length === 0 && <Empty/>}
 
            
-         {task.map(task => {
+         {tasks.map(task => {
            return(<Task 
-            content={task}
+            key={task.id}
             onDeleteTask={deleteTask}
-            checked={false}
             onToggleTask={handleToggleTask}
-          
+            data={task} 
            />
            )
          })
          }
-        
-       </div>
- 
+       </div> 
      </div>
-    
 
   )
 }
