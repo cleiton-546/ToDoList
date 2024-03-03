@@ -30,11 +30,13 @@ export function Task({ data, onDeleteTask,  onToggleTask }: TaskProps) {
     
     return(
         <div className={taskClassName}>
-            <div className={styles.checked}>
-               <button  className={styles.circle} onClick={toggleChecked} ><IoIosCheckmark/></button>                   
-            </div>
-            <div className={styles.text}>
+            <div className={styles.content}>
+              <div className={styles.checked}>
+                 <button  className={styles.circle} onClick={toggleChecked} ><IoIosCheckmark/></button>                   
+              </div>
+              <div className={styles.text}>
                 <p>{data.content}</p>
+              </div>
             </div>
             <button className={styles.button} onClick={handleDeleteTask}><GoTrash/></button>
         </div>

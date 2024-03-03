@@ -24,6 +24,7 @@
   color: var(--gray-300);
   outline: none;
   
+  
 }
 
 .form button {
@@ -54,11 +55,13 @@
     display: flex;
     justify-content: space-between;
     margin-top: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 .contentInfo {
     display: flex;
     gap: 0.5rem;
+   
 }
 
 .contentInfo {
@@ -88,6 +91,7 @@
   background: var(--gray-400);
   color: var(--gray-200);
   font-size: 0.8rem;
+  
 
   span {
     padding: 2px 0.5rem;
